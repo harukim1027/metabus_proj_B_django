@@ -32,7 +32,7 @@ class LostPetBoard(TimestampedModel):
     size = models.CharField(max_length=10)
     lost_location = models.TextField()
 
-    Lost_time = models.DateTimeField(auto_now_add=True)
+    lost_time = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -48,7 +48,7 @@ class LostPetBoardImage(models.Model):
     image2 = models.ImageField(blank=True, validators=[validate_image])
     image3 = models.ImageField(blank=True, validators=[validate_image])
 
-    lost_board_no = models.ForeignKey(LostPetBoard, on_delete=models.CASCADE)
+    lost_board_no = models.OneToOneField(LostPetBoard, on_delete=models.CASCADE, related_name="board_image")
 
     class Meta:
         ordering = ['-lost_image_no']

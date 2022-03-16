@@ -5,7 +5,7 @@ from find_owner_board.views import FindOwnerBoardViewSet, FindOwnerBoardCommentV
 app_name = "find_owner_board"
 
 router = DefaultRouter()
-# router.register("find_owner_board", FindOwnerBoardViewSet)
+router.register("posts", FindOwnerBoardViewSet)
 # router.register("find_owner_board", FindOwnerBoardCommentViewSet)
 # router.register("find_owner_board", FindOwnerBoardImageViewSet)
 
