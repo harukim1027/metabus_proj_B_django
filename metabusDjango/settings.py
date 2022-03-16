@@ -21,7 +21,7 @@ if dot_env_path.exists():
 SECRET_KEY = env.str("SECRET_KEY", default="---- SECRET KEY ----")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', default=True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'adopt_review',  # 입양 후기 게시판
     'inquiry_board',  # 문의 게시판
     'notice',  # 공지사항
+    'find_owner_board',  # 주인찾습니다 게시판
 ]
 
 if DEBUG:
