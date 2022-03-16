@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     'adopt_review',  # 입양 후기 게시판
     'inquiry_board',  # 문의 게시판
     'notice',  # 공지사항
+
+
+    'lost_pet_board', # 잃어버렸어요 게시판
+
+
 ]
 
 if DEBUG:

@@ -26,11 +26,6 @@ class Notice(TimestampedModel):
     notice_no = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
     content = models.TextField()
-    image1 = models.ImageField(blank=True, validators=[validate_image])
-    image2 = models.ImageField(blank=True, validators=[validate_image])
-    image3 = models.ImageField(blank=True, validators=[validate_image])
-    image4 = models.ImageField(blank=True, validators=[validate_image])
-    image5 = models.ImageField(blank=True, validators=[validate_image])
     file1 = models.FileField(blank=True)
     file2 = models.FileField(blank=True)
     file3 = models.FileField(blank=True)
@@ -51,3 +46,18 @@ class Notice(TimestampedModel):
     # def get_file_ext(self):
     #     return self.get_file_name().split('.')[-1]
 
+
+# 공지사항 이미지
+class NoticeImage(models.Model):
+    notice_image_no = models.AutoField(primary_key=True)
+
+    image1 = models.ImageField(blank=True, validators=[validate_image])
+    image2 = models.ImageField(blank=True, validators=[validate_image])
+    image3 = models.ImageField(blank=True, validators=[validate_image])
+    image4 = models.ImageField(blank=True, validators=[validate_image])
+    image5 = models.ImageField(blank=True, validators=[validate_image])
+
+    notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-notice_image_no']

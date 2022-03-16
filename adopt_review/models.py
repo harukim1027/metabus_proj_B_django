@@ -22,6 +22,7 @@ class TimestampedModel(models.Model):
         abstract = True
 
 
+# 입양 다이어리
 class Review(TimestampedModel):
     review_no = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100, db_index=True,
@@ -30,14 +31,40 @@ class Review(TimestampedModel):
                                  RegexValidator(r"[ㄱ-힣]", message="한글을 입력해주세요."),
                              ])
     content = models.TextField()
-    image1 = models.ImageField(blank=True, validators=[validate_image])
-    image2 = models.ImageField(blank=True, validators=[validate_image])
-    image3 = models.ImageField(blank=True, validators=[validate_image])
-    image4 = models.ImageField(blank=True, validators=[validate_image])
-    image5 = models.ImageField(blank=True, validators=[validate_image])
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     adoptassignment = models.ForeignKey(AdoptAssignment, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-review_no']
 
+
+# 입양 다이어리 후기 사진
+class AdoptReviewImage(models.Model):
+    review_image_no = models.AutoField(primary_key=True)
+
+    image1 = models.ImageField(blank=False, validators=[validate_image])
+    image2 = models.ImageField(blank=True, validators=[validate_image])
+    image3 = models.ImageField(blank=True, validators=[validate_image])
+    image4 = models.ImageField(blank=True, validators=[validate_image])
+    image5 = models.ImageField(blank=True, validators=[validate_image])
+
+    review_no = models.ForeignKey(Review, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-review_image_no']
+
+
+# 입양 다이어리 게시판 댓글
+class AdoptReviewComment(TimestampedModel):
+    review_comment_no = models.AutoField(primary_key=True)
+
+    comment_content = models.TextField()
+
+    review_no = models.ForeignKey(Review, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment_content
+
+    class Meta:
+        ordering = ['-review_comment_no']

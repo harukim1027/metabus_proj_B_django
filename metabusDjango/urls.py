@@ -12,6 +12,9 @@ urlpatterns = [
     path('inquiry_board/', include("inquiry_board.urls")),
     path('notice/', include("notice.urls")),
     path('streetanimal/', include("streetanimal.urls")),
+
+
+    path('lost_pet_board/', include("lost_pet_board.urls")),
 ]
 
 
