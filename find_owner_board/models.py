@@ -29,6 +29,7 @@ class FindOwnerBoardComment(TimestampedModel):
     find_comment_no = models.AutoField(primary_key=True)
     comment_content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    find_board_no = models.ForeignKey(FindOwnerBoard, on_delete=models.CASCADE)
 
 
 class FindOwnerBoardImage(TimestampedModel):
@@ -36,5 +37,6 @@ class FindOwnerBoardImage(TimestampedModel):
     image1 = models.TextField()
     image2 = models.TextField(blank=True)
     image3 = models.TextField(blank=True)
+    find_board_no = models.ForeignKey(FindOwnerBoard, on_delete=models.CASCADE)
 
 
