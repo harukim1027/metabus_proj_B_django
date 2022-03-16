@@ -17,6 +17,15 @@ class TimestampedModel(models.Model):
         abstract = True
 
 
+class AllSecurityCenter(models.Model):
+    center_name = models.CharField(max_length=30, unique=True, primary_key=True)
+    center_address = models.TextField()
+    center_call = models.CharField(max_length=14)
+
+    def __str__(self):
+        return self.center_name
+
+
 class Animal(TimestampedModel):
     announce_no = models.AutoField(primary_key=True)
     breed = models.CharField(max_length=30)
@@ -29,6 +38,7 @@ class Animal(TimestampedModel):
     neutering = models.BooleanField(default=False)
     info = models.TextField()
     status = models.CharField(max_length=30)
+    center_name = models.ForeignKey(AllSecurityCenter, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.announce_no
