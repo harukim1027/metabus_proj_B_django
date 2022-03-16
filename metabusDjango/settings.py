@@ -21,7 +21,7 @@ if dot_env_path.exists():
 SECRET_KEY = env.str("SECRET_KEY", default="---- SECRET KEY ----")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', default=True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
@@ -106,7 +106,7 @@ DATABASES = {
     'default': {
         # mariadb setting
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'metabusA',  # DB 이름
+        'NAME': 'metabusB',  # DB 이름
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': '127.0.0.1',

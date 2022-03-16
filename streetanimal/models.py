@@ -17,47 +17,43 @@ class TimestampedModel(models.Model):
         abstract = True
 
 
-class Category(models.Model):
-    CATEGORY = (
-        ("강아지", "강아지"),
-        ("고양이", "고양이"),
-    )
-    name = models.CharField(
-        choices=CATEGORY, db_index=True, verbose_name="품종", max_length=30, primary_key=True
-    )
+class All_security_center(models.Model):
+    center_name = models.CharField(max_length=30, unique=True, primary_key=True)
+    center_address = models.TextField()
+    center_call = models.CharField(max_length=14)
 
     def __str__(self):
-        return self.name
+        return self.center_name
 
 
 class Animal(TimestampedModel):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="동물 종", default="강아지")
-    animal_no = models.AutoField(primary_key=True)
-    animal_reg_num = models.CharField(max_length=50, unique=True)
-    size = models.CharField(max_length=30, choices=(
-        ("소형", "소형"),
-        ("중형", "중형"),
-        ("대형", "대형"),
-    ), default="소형")
-    sex = models.CharField(max_length=30, choices=(
+    announce_no = models.CharField(max_length=30, unique=True, primary_key=True)
+    breed = models.CharField(max_length=30)
+    color = models.CharField(max_length=20)
+    sex = models.CharField(max_length=10, choices=(
         ("암컷", "암컷"),
         ("수컷", "수컷"),
     ), default="암컷")
     age = models.IntegerField()
-    date_of_discovery = models.DateTimeField()
-    place_of_discovery = models.CharField(max_length=30)
-    info = models.CharField(max_length=200)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    protection_status = models.CharField(max_length=50, choices=(
-        ("입양 대기", "입양 대기"),
-        ("입양 매칭 중", "입양 매칭 중"),
-        ("입양 완료!", "입양 완료!"),
-    ), default="입양 대기")
-    image = models.ImageField(blank=True, validators=[validate_image])
+    weight = models.IntegerField()
+    find_location = models.CharField(max_length=50)
+    find_time = models.DateField()
+    neutering = models.BooleanField()
+    info = models.TextField()
+    status = models.CharField(max_length=30)
+    center_name = models.ForeignKey(All_security_center, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.animal_reg_num
+        return self.announce_no
 
     class Meta:
-        ordering = ['-animal_no']
+        ordering = ['announce_no']
+
+
+class Animal_image(models.Model):
+    animal_image_no = models.IntegerField(unique=True, primary_key=True)
+    image1 = models.ImageField()
+    image2 = models.ImageField(blank=True)
+    image3 = models.ImageField(blank=True)
+    announce_no = models.ForeignKey(Animal, on_delete=models.CASCADE)
+
