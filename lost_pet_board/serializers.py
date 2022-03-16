@@ -9,7 +9,7 @@ class LostPetBoardCreateSerializer(serializers.ModelSerializer):
 
 
 class LostPetBoardSerializer(serializers.ModelSerializer):
-    Lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
