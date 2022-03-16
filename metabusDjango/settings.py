@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
 
     'lost_pet_board', # 잃어버렸어요 게시판
+    'around_infra', #주변 인프라
 
 
 ]
