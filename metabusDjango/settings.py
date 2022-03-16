@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'inquiry_board',  # 문의 게시판
     'notice',  # 공지사항
     'find_owner_board',  # 주인찾습니다 게시판
+    'lost_pet_board', # 잃어버렸어요 게시판
 ]
 
 if DEBUG:
@@ -102,7 +103,7 @@ DATABASES = {
     'default': {
         # mariadb setting
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'metabusA',  # DB 이름
+        'NAME': 'metabusB',  # DB 이름
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': '127.0.0.1',

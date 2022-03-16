@@ -1,5 +1,5 @@
 from django.contrib import admin
-from streetanimal.models import Animal, Category
+from streetanimal.models import Animal, AnimalImage
 
 
 @admin.register(Animal)
@@ -9,9 +9,6 @@ class AnimalAdmin(admin.ModelAdmin):
     search_fields = ["animal_reg_num"]
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["name"]
-    list_display_links = ["name"]
-    search_fields = ["name"]
-
+@admin.register(AnimalImage)
+class AnimalImageAdmin(admin.ModelAdmin):
+    pass
