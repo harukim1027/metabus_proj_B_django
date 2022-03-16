@@ -48,7 +48,7 @@ class LostPetBoardImage(models.Model):
     image2 = models.ImageField(blank=True, validators=[validate_image])
     image3 = models.ImageField(blank=True, validators=[validate_image])
 
-    lost_board_no = models.OneToOneField(LostPetBoard, on_delete=models.CASCADE)
+    lost_board_no = models.OneToOneField(LostPetBoard, on_delete=models.CASCADE, related_name="board_image")
 
     class Meta:
         ordering = ['-lost_image_no']
