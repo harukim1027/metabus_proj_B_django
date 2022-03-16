@@ -17,43 +17,35 @@ class TimestampedModel(models.Model):
         abstract = True
 
 
-class All_security_center(models.Model):
-    center_name = models.CharField(max_length=30, unique=True, primary_key=True)
-    center_address = models.TextField()
-    center_call = models.CharField(max_length=14)
-
-    def __str__(self):
-        return self.center_name
-
-
 class Animal(TimestampedModel):
-    announce_no = models.CharField(max_length=30, unique=True, primary_key=True)
+    announce_no = models.AutoField(primary_key=True)
     breed = models.CharField(max_length=30)
     color = models.CharField(max_length=20)
-    sex = models.CharField(max_length=10, choices=(
-        ("암컷", "암컷"),
-        ("수컷", "수컷"),
-    ), default="암컷")
-    age = models.IntegerField()
+    sex = models.CharField(max_length=10)
+    age = models.CharField(max_length=20)
     weight = models.IntegerField()
     find_location = models.CharField(max_length=50)
-    find_time = models.DateField()
-    neutering = models.BooleanField()
+    find_time = models.DateTimeField()
+    neutering = models.BooleanField(default=False)
     info = models.TextField()
     status = models.CharField(max_length=30)
-    center_name = models.ForeignKey(All_security_center, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.announce_no
 
     class Meta:
-        ordering = ['announce_no']
+        ordering = ['-announce_no']
 
 
-class Animal_image(models.Model):
-    animal_image_no = models.IntegerField(unique=True, primary_key=True)
-    image1 = models.ImageField()
-    image2 = models.ImageField(blank=True)
-    image3 = models.ImageField(blank=True)
+# 유기동물 이미지
+class AnimalImage(models.Model):
+    animal_image_no = models.AutoField(primary_key=True)
+
+    image1 = models.ImageField(blank=False, validators=[validate_image])
+    image2 = models.ImageField(blank=True, validators=[validate_image])
+    image3 = models.ImageField(blank=True, validators=[validate_image])
+
     announce_no = models.ForeignKey(Animal, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['-animal_image_no']
