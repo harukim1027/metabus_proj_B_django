@@ -1,17 +1,22 @@
 from django.contrib import admin
-from streetanimal.models import Animal, Category
+from streetanimal.models import Animal, All_security_center, Animal_image
 
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
-    list_display = ["animal_no", "animal_reg_num", "category", "size", "sex", "protection_status"]
-    list_display_links = ["animal_reg_num"]
-    search_fields = ["animal_reg_num"]
+    list_display = ["announce_no", "breed", "color", "sex", "age", "status"]
+    list_display_links = ["announce_no"]
+    search_fields = ["announce_no"]
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["name"]
-    list_display_links = ["name"]
-    search_fields = ["name"]
+@admin.register(All_security_center)
+class CenterAdmin(admin.ModelAdmin):
+    list_display = ["center_name"]
+    list_display_links = ["center_name"]
+    search_fields = ["center_name"]
 
+@admin.register(Animal_image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ["image1"]
+    list_display_links = ["image1"]
+    search_fields = ["image1"]
