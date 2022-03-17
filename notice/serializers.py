@@ -26,7 +26,6 @@ class NoticeSerializer(serializers.ModelSerializer):
     notice_image = NoticeImageSerializer(read_only=True)
     notice_file = NoticeFileSerializer(read_only=True)
 
-
     class Meta:
         model = Notice
         fields = "__all__"
