@@ -23,8 +23,8 @@ class NoticeFileSerializer(serializers.ModelSerializer):
 class NoticeSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    notice_image = NoticeImageSerializer(read_only=True)
-    notice_file = NoticeFileSerializer(read_only=True)
+    notice_image = NoticeImageSerializer(many=True, read_only=True)
+    notice_file = NoticeFileSerializer(many=True, read_only=True)
 
     class Meta:
         model = Notice
