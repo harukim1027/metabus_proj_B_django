@@ -7,6 +7,7 @@ class LostPetBoardCreateSerializer(serializers.ModelSerializer):
         model = LostPetBoard
         fields = "__all__"
 
+
 class LostPetBoardImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = LostPetBoardImage

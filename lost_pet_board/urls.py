@@ -5,7 +5,7 @@ from lost_pet_board.views import LostPetViewSet
 app_name = "lost_pet_board"
 
 router = DefaultRouter()
-router.register("posts", LostPetViewSet)
+router.register("board", LostPetViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
