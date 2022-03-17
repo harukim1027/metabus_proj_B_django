@@ -45,8 +45,6 @@ class AdoptAssignment(TimestampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     animal = models.OneToOneField(Animal, on_delete=models.CASCADE, unique=True)
 
-
-
     class Meta:
         ordering = ['-assignment_no']
 
