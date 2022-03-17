@@ -17,7 +17,7 @@ class LostPetBoardSerializer(serializers.ModelSerializer):
     lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    board_image = LostPetBoardImageSerializer(read_only=True)
+    board_image = LostPetBoardImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = LostPetBoard
