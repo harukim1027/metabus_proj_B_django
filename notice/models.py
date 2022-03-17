@@ -32,18 +32,6 @@ class Notice(TimestampedModel):
     class Meta:
         ordering = ['-notice_no']
 
-    def get_file_name1(self):
-        return os.path.basename(self.file1.name)
-
-    def get_file_name2(self):
-        return os.path.basename(self.file2.name)
-
-    def get_file_name3(self):
-        return os.path.basename(self.file3.name)
-
-    # def get_file_ext(self):
-    #     return self.get_file_name().split('.')[-1]
-
 
 # 공지사항 이미지
 class NoticeImage(models.Model):
@@ -67,3 +55,6 @@ class NoticeFile(models.Model):
 
     class Meta:
         ordering = ['-notice_file_no']
+
+    def get_file_name1(self):
+        return os.path.basename(self.file.name)
