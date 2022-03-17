@@ -44,11 +44,9 @@ class LostPetBoard(TimestampedModel):
 class LostPetBoardImage(models.Model):
     lost_image_no = models.AutoField(primary_key=True)
 
-    image1 = models.ImageField(blank=False, validators=[validate_image])
-    image2 = models.ImageField(blank=True, validators=[validate_image])
-    image3 = models.ImageField(blank=True, validators=[validate_image])
+    image = models.ImageField(blank=False, validators=[validate_image])
 
-    lost_board_no = models.OneToOneField(LostPetBoard, on_delete=models.CASCADE, related_name="board_image")
+    lost_board_no = models.ForeignKey(LostPetBoard, on_delete=models.CASCADE, related_name="board_image")
 
     class Meta:
         ordering = ['-lost_image_no']

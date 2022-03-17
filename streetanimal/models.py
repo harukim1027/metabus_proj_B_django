@@ -51,11 +51,9 @@ class Animal(TimestampedModel):
 class AnimalImage(models.Model):
     animal_image_no = models.AutoField(primary_key=True)
 
-    image1 = models.ImageField(blank=False, validators=[validate_image])
-    image2 = models.ImageField(blank=True, validators=[validate_image])
-    image3 = models.ImageField(blank=True, validators=[validate_image])
+    image = models.ImageField(blank=False, validators=[validate_image])
 
-    announce_no = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    announce_no = models.ForeignKey(Animal, on_delete=models.CASCADE, related_name="announce_image")
 
     class Meta:
         ordering = ['-animal_image_no']
