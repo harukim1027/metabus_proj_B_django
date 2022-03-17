@@ -5,7 +5,7 @@ from find_owner_board.views import FindOwnerBoardViewSet
 app_name = "find_owner_board"
 
 router = DefaultRouter()
-router.register("posts", FindOwnerBoardViewSet)
+router.register("board", FindOwnerBoardViewSet)
 
 
 urlpatterns = [
