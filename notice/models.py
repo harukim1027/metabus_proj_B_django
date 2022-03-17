@@ -26,9 +26,7 @@ class Notice(TimestampedModel):
     notice_no = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
     content = models.TextField()
-    file1 = models.FileField(blank=True)
-    file2 = models.FileField(blank=True)
-    file3 = models.FileField(blank=True)
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
@@ -51,13 +49,21 @@ class Notice(TimestampedModel):
 class NoticeImage(models.Model):
     notice_image_no = models.AutoField(primary_key=True)
 
-    image1 = models.ImageField(blank=True, validators=[validate_image])
-    image2 = models.ImageField(blank=True, validators=[validate_image])
-    image3 = models.ImageField(blank=True, validators=[validate_image])
-    image4 = models.ImageField(blank=True, validators=[validate_image])
-    image5 = models.ImageField(blank=True, validators=[validate_image])
+    image = models.ImageField(blank=True, validators=[validate_image])
 
-    notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE)
+    notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE, related_name="notice_image")
 
     class Meta:
         ordering = ['-notice_image_no']
+
+
+# 공지사항 첨부파일
+class NoticeFile(models.Model):
+    notice_file_no = models.AutoField(primary_key=True)
+
+    file = models.FileField(blank=True, validators=[validate_image])
+
+    notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE, related_name="notice_file")
+
+    class Meta:
+        ordering = ['-notice_file_no']

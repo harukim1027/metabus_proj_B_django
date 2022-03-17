@@ -1,8 +1,6 @@
 from django.apps import AppConfig
 
 
-class NoticeConfig(AppConfig):
+class AroundInfraConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'notice'
-
-
+    name = 'around_infra'

@@ -45,6 +45,8 @@ class AdoptAssignment(TimestampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     animal = models.OneToOneField(Animal, on_delete=models.CASCADE, unique=True)
 
+
+
     class Meta:
         ordering = ['-assignment_no']
 
@@ -52,10 +54,8 @@ class AdoptAssignment(TimestampedModel):
 # 입양 신청 거주지 사진
 class AdoptAssignmentHomeImage(models.Model):
     home_image_no = models.AutoField(primary_key=True)
-    home_image1 = models.ImageField(validators=[validate_image])
-    home_image2 = models.ImageField(validators=[validate_image])
-    home_image3 = models.ImageField(validators=[validate_image])
-    assignment_no = models.ForeignKey(AdoptAssignment, on_delete=models.CASCADE)
+    image = models.ImageField(validators=[validate_image])
+    assignment_no = models.ForeignKey(AdoptAssignment, on_delete=models.CASCADE, related_name="home_image")
 
     class Meta:
         ordering = ['-home_image_no']
