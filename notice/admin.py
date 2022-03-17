@@ -13,13 +13,13 @@ class NoticeAdmin(admin.ModelAdmin):
 
 @admin.register(NoticeFile)
 class NoticeFileAdmin(admin.ModelAdmin):
-    list_display = ["notice_file_no"]
-    list_display_links = ["notice_file_no"]
+    list_display = ["notice_file_no", "file"]
+    list_display_links = ["notice_file_no", "file"]
 
 
 @admin.register(NoticeImage)
 class NoticeImageAdmin(admin.ModelAdmin):
-    list_display = ["notice_image_no"]
-    list_display_links = ["notice_image_no"]
+    list_display = ["notice_image_no", "image"]
+    list_display_links = ["notice_image_no", "image"]
 
 

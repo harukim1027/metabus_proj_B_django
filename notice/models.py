@@ -63,7 +63,7 @@ class NoticeFile(models.Model):
 
     file = models.FileField(blank=True, validators=[validate_image])
 
-    notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE , related_name="notice_file")
+    notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE, related_name="notice_file")
 
     class Meta:
         ordering = ['-notice_file_no']

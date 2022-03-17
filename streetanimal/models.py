@@ -27,7 +27,7 @@ class AllSecurityCenter(models.Model):
 
 
 class Animal(TimestampedModel):
-    announce_no = models.AutoField(primary_key=True)
+    announce_no = models.CharField(primary_key=True, max_length=30)
     breed = models.CharField(max_length=30)
     color = models.CharField(max_length=20)
     sex = models.CharField(max_length=10)
