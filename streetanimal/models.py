@@ -19,8 +19,8 @@ class TimestampedModel(models.Model):
 
 class AllSecurityCenter(models.Model):
     center_name = models.CharField(max_length=30, unique=True, primary_key=True)
-    center_address = models.TextField()
     center_call = models.CharField(max_length=14)
+    center_address = models.TextField()
 
     def __str__(self):
         return self.center_name
