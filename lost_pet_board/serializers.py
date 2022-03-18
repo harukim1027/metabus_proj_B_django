@@ -22,5 +22,5 @@ class LostPetBoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LostPetBoard
-        fields = ["board_image", "lost_time", "created_at", "updated_at"]
-
+        fields = ["lost_board_no", "title", "content", "pet_name", "animal_type", "dog_breed", "cat_breed", "size",
+                  "lost_location", "lost_time", "board_image", "user", "created_at", "updated_at"]
