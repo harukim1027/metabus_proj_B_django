@@ -21,5 +21,5 @@ class FindOwnerBoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FindOwnerBoard
-        fields = ["find_board_no", "title", "content", "animal_type", "dog_breed", "cat_greed", "size",
+        fields = ["find_board_no", "title", "content", "animal_type", "dog_breed", "cat_breed", "size",
                   "animal_tag", "find_location", "find_time", "board_image", "user", "created_at", "updated_at"]
