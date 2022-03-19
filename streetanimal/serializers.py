@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from streetanimal.models import Animal, AnimalImage
+from streetanimal.models import Animal, AnimalImage, AllSecurityCenter
 
 
 class AnimalCreateSerializer(serializers.ModelSerializer):
@@ -13,6 +13,11 @@ class AnimalImageSerializer(serializers.ModelSerializer):
         model = AnimalImage
         fields = "__all__"
 
+
+class CenterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AllSecurityCenter
+        fields = "__all__"
 
 
 class AnimalSerializer(serializers.ModelSerializer):
