@@ -219,7 +219,7 @@ def get_secret(setting, secrets=secrets):
 EMAIL_HOST = 'smtp.gmail.com'
 
 # gmail과 통신하는 포트
-EMAIL_PORT = '587'
+EMAIL_PORT = get_secret("EMAIL_PORT")
 
 # 발신할 이메일
 # EMAIL_HOST_USER = '구글아이디@gmail.com'
@@ -235,5 +235,16 @@ EMAIL_USE_TLS = True
 # 사이트와 관련한 자동응답을 받을 이메일 주소
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+SEVER_EMAIL = get_secret("SERVER_EMAIL")
+
+EMAIL_BACKEND = get_secret("EMAIL_BACKEND"
+
+                           )
+
 # # reset link가 https가 아니라 http로 갈 때]
 # SECURE_SSL_REDIRECT = True
+
+# 회원 가입을 받고 회원 가입 이메일 인증을 만 하루 안에 완료하도록 설정한다.
+ACCOUNT_ACTIVATION_DAYS = 1
+REGISTRATION_OPEN = True # 기본값
+

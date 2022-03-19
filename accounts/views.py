@@ -1,3 +1,9 @@
+import traceback
+import bcrypt
+import requests
+
+
+
 from django.conf import settings
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -10,13 +16,16 @@ from django.shortcuts import resolve_url
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.http import urlsafe_base64_decode
+from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, TemplateView
-from rest_framework import viewsets
-from rest_framework.generics import CreateAPIView
+from rest_framework import viewsets, status
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView as OriginTokenObtainPairView,
     TokenRefreshView as OriginTokenRefreshView,
@@ -26,6 +35,24 @@ from accounts.serializers import TokenObtainPairSerializer, UserCreationSerializ
 from notice.paginations.Pagination import Pagination
 
 from django.contrib.auth import login as auth_login
+
+from rest_framework import mixins
+
+# 이메일 인증을 위한 import 추가
+from django.contrib.auth.mixins import UserPassesTestMixin
+import json
+from .models import User
+from .tokens import account_activation_token
+from .text import message
+
+from django.views import View
+from django.http import HttpResponse, JsonResponse
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.shortcuts import redirect
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
 
 # email 전송을 위한 import 추가
 from django.core.mail.message import EmailMessage
@@ -58,15 +85,28 @@ class UserViewSet(viewsets.ModelViewSet):
 
         query = self.request.query_params.get("query", "")
         if query:
-            qs = qs.filter(userID__icontains=query) or qs.filter(name__icontains=query) or qs.filter(nickname__icontains=query)
+            qs = qs.filter(userID__icontains=query) or qs.filter(name__icontains=query) or qs.filter(
+                nickname__icontains=query)
 
         return qs
+
+
+# 회원 가입 및 이메일 전송을 위한 API View  : 회원가입에 성공하면 인증 이메일을 전송
+#
+# 기존 것
+
+class CreateAPIView(mixins.CreateModelMixin, GenericAPIView):
+
+    def post(self, request, *args, **kwargs):
+
+        return self.create(request, *args, **kwargs)
 
 
 class SignupAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreationSerializer
     permission_classes = [AllowAny]
+
 
 
 class TokenObtainPairView(OriginTokenObtainPairView):
@@ -84,7 +124,6 @@ class TokenRefreshView(OriginTokenRefreshView):
 #     from_email = "metabusemail@gmail.com"
 #     message = "메시지 테스트"
 #     EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
-
 
 
 #  password 변경을 위한 view 들
@@ -245,7 +284,6 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
         return context
 
 
-
 class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
     template_name = "registration/password_reset_complete.html"
     title = "Password reset complete"
@@ -288,3 +326,30 @@ class PasswordChangeDoneView(PasswordContextMixin, TemplateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
+
+# 이메일 인증을 위한 view
+
+
+class UserActivate(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, uidb64, token):
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        try:
+            if user is not None and account_activation_token.check_token(user, token):
+                user.is_active = True
+                user.save()
+                return Response(user.email + '계정이 활성화 되었습니다.', status=status.HTTP_200_OK)
+            else:
+                return Response("만료된 링크입니다.", status=status.HTTP_400_BAD_REQUEST)
+
+
+        except Exception:
+            print(traceback.format_exc())
