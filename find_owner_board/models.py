@@ -105,6 +105,12 @@ class FindOwnerBoard(TimestampedModel):
         ("대형", "대형"),
     ), default="소형")
 
+    sex = models.CharField(max_length=10, choices=(
+        ("미상", "미상"),
+        ("암컷", "암컷"),
+        ("수컷", "수컷"),
+    ), default="미상")
+
     animal_tag = models.CharField(max_length=30)
     find_location = models.CharField(max_length=50)
     find_time = models.DateTimeField(auto_now_add=True)

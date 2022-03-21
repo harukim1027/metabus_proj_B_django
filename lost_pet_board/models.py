@@ -108,6 +108,12 @@ class LostPetBoard(TimestampedModel):
         ("대형", "대형"),
     ), default="소형")
 
+    sex = models.CharField(max_length=10, choices=(
+        ("미상", "미상"),
+        ("암컷", "암컷"),
+        ("수컷", "수컷"),
+    ), default="미상")
+
     lost_location = models.CharField(max_length=50)
     lost_time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

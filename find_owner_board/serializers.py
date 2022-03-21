@@ -8,6 +8,12 @@ class FindOwnerBoardCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class FindOwnerBoardImageCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FindOwnerBoardImage
+        fields = "__all__"
+
+
 class FindOwnerBoardImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = FindOwnerBoardImage
@@ -21,5 +27,5 @@ class FindOwnerBoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FindOwnerBoard
-        fields = ["find_board_no", "title", "content", "animal_type", "dog_breed", "cat_breed", "size",
+        fields = ["find_board_no", "title", "content", "animal_type", "dog_breed", "cat_breed", "size", "sex",
                   "animal_tag", "find_location", "find_time", "board_image", "user", "created_at", "updated_at"]
