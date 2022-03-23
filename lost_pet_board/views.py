@@ -28,6 +28,10 @@ class LostPetViewSet(viewsets.ModelViewSet):
         if animaltype:
             qs = qs.filter(animal_type__icontains=animaltype)
 
+        author = self.request.query_params.get("author", "")
+        if author:
+            qs = qs.filter(user__userID__icontains=author)
+
         return qs
 
     def get_permissions(self):
