@@ -28,16 +28,21 @@ class AllSecurityCenter(models.Model):
 
 class Animal(TimestampedModel):
     announce_no = models.CharField(primary_key=True, max_length=30)
+    kind_of_animal = models.CharField(max_length=18)
     breed = models.CharField(max_length=30)
     color = models.CharField(max_length=20)
     sex = models.CharField(max_length=10)
-    age = models.CharField(max_length=20)
-    weight = models.IntegerField()
-    find_location = models.CharField(max_length=50)
-    find_time = models.DateTimeField()
-    neutering = models.BooleanField(default=False)
+    neutering = models.CharField(max_length=10)
     info = models.TextField()
-    status = models.CharField(max_length=30)
+    date_time_of_receipt = models.DateTimeField()
+    reason_for_rescue=models.TextField()
+    place_of_discovery = models.CharField(max_length=50)
+    period_of_announcement = models.DateField()
+    shelter = models.CharField(max_length=30)
+    center_call = models.CharField(max_length=18, default=False)
+    person_in_charge = models.CharField(max_length=18, default=False)
+    significant = models.TextField(default=False)
+    
     center_name = models.ForeignKey(AllSecurityCenter, on_delete=models.CASCADE)
 
     def __str__(self):

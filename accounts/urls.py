@@ -54,6 +54,4 @@ urlpatterns += [
     ),
 
     # 인증메일 활성화를 위한 path
-    path('activate/<str:uidb64>/<str:token>/', UserActivate.as_view(), name="activate"),
-
-]
+    path('activate/<str:uidb64>/<str:token>/', UserActivate.as_view(), name="activate"),]

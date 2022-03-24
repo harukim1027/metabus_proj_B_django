@@ -2,8 +2,6 @@ import traceback
 import bcrypt
 import requests
 
-
-
 from django.conf import settings
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -98,7 +96,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class CreateAPIView(mixins.CreateModelMixin, GenericAPIView):
 
     def post(self, request, *args, **kwargs):
-
         return self.create(request, *args, **kwargs)
 
 
@@ -106,7 +103,6 @@ class SignupAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreationSerializer
     permission_classes = [AllowAny]
-
 
 
 class TokenObtainPairView(OriginTokenObtainPairView):
@@ -346,6 +342,7 @@ class UserActivate(APIView):
             if user is not None and account_activation_token.check_token(user, token):
                 user.is_active = True
                 user.save()
+
                 return Response(user.email + '계정이 활성화 되었습니다.', status=status.HTTP_200_OK)
             else:
                 return Response("만료된 링크입니다.", status=status.HTTP_400_BAD_REQUEST)
@@ -353,3 +350,8 @@ class UserActivate(APIView):
 
         except Exception:
             print(traceback.format_exc())
+
+#
+# class UserActivateDone(UserActivate, TemplateView):
+#     template_name = "accounts/accounts_activate_done.html"
+#     title = "user activate successful"
