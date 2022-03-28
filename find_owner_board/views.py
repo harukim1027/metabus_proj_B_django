@@ -30,6 +30,10 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
         if animaltype:
             qs = qs.filter(animal_type__icontains=animaltype)
 
+        status = self.request.query_params.get("status", "")
+        if status:
+            qs = qs.filter(status__icontains=status)
+
         author = self.request.query_params.get("author", "")
         if author:
             qs = qs.filter(user__userID__icontains=author)
@@ -41,6 +45,10 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+
+    # 추가
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user, )
 
     # def create(self, request, *args, **kwargs):
     #     return super().create(request, *args, **kwargs)
@@ -58,25 +66,25 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
     #     serializer.save()
 
     ######################################################################
-    def create(self, request, *args, **kwargs):
-        # serializer = self.get_serializer(data=request.data)
-        # serializer.is_valid(raise_exception=True)
-        # self.perform_create(serializer)
-        board_data = request.data
-        image_data = board_data
-        print(image_data)
-        serializer = self.get_serializer(data=board_data)
-
-        if serializer.is_valid():
-            serializer.save()
-        else:
-            return Response(serializer.errors)
-
-        image_serializer = FindOwnerBoardImageSerializer.objects.create(image=image_data, find_board_no=serializer.data.find_board_no)
-        return Response(serializer.data)
-
-    def perform_create(self, serializer):
-        serializer.save()
+    # def create(self, request, *args, **kwargs):
+    #     # serializer = self.get_serializer(data=request.data)
+    #     # serializer.is_valid(raise_exception=True)
+    #     # self.perform_create(serializer)
+    #     board_data = request.data
+    #     image_data = board_data
+    #     print(image_data)
+    #     serializer = self.get_serializer(data=board_data)
+    #
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #     else:
+    #         return Response(serializer.errors)
+    #
+    #     image_serializer = FindOwnerBoardImage.objects.create(image=image_data, find_board_no=serializer.data.find_board_no)
+    #     return Response(serializer.data)
+    #
+    # def perform_create(self, serializer):
+    #     serializer.save()
 
     # def perform_create(self, serializer):
     #     super().perform_create(serializer)
@@ -100,6 +108,7 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
     # 이미지 저장을 위해 추가
     # def create(self, serializer):
     #     serializer.save(find_board_no=self.request.user)
+
 
 class FindOwnerBoardImageViewSet(viewsets.ModelViewSet):
     queryset = FindOwnerBoardImage.objects.all()

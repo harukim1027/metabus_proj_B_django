@@ -24,6 +24,10 @@ class TimestampedModel(models.Model):
 class FindOwnerBoard(TimestampedModel):
     find_board_no = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, db_index=True)
+    status = models.CharField(max_length=20, choices=(
+        ("찾는중", "찾는중"),
+        ("찾았어요", "찾았어요"),
+    ), default="찾는중", db_index=True)
     content = models.TextField()
     animal_type = models.CharField(max_length=10, choices=(
         ("강아지", "강아지"),

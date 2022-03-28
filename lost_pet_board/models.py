@@ -26,6 +26,10 @@ class TimestampedModel(models.Model):
 class LostPetBoard(TimestampedModel):
     lost_board_no = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
+    status = models.CharField(max_length=20, choices=(
+        ("찾는중", "찾는중"),
+        ("찾았어요", "찾았어요"),
+    ), default="찾는중", db_index=True)
     content = models.TextField()
     pet_name = models.CharField(max_length=20)
     animal_type = models.CharField(max_length=10, choices=(
