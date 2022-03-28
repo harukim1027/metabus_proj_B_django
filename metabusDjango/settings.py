@@ -248,3 +248,7 @@ EMAIL_BACKEND = get_secret("EMAIL_BACKEND"
 ACCOUNT_ACTIVATION_DAYS = 1
 REGISTRATION_OPEN = True # 기본값
 
+
+
+
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']

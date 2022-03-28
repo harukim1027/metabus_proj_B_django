@@ -1,6 +1,6 @@
 from typing import Dict
 
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import SetPasswordForm, AuthenticationForm
 
 from django.contrib.auth.password_validation import validate_password
@@ -66,6 +66,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         if attrs["password"] != attrs["password2"]:
             raise serializers.ValidationError("동일한 비밀번호를 입력해주세요.")
+
         if len(attrs) < 8:
             raise serializers.ValidationError("패스워드는 최소 8자 이상이어야 합니다.")
 
@@ -126,7 +127,9 @@ class TokenObtainPairSerializer(OriginTokenObtainPairSerializer):
         data["region"] = self.user.region
         data["password_quiz"] = self.user.password_quiz
         data["password_quiz_answer"] = self.user.password_quiz_answer
+        data['is_active'] = self.user.is_active
         data["is_staff"] = self.user.is_staff
+
         return data
 
 
