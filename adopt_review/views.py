@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from adopt_review.serializers import ReviewSerializer, ReviewCreateSerializer
-from adopt_review.models import Review
+from adopt_review.serializers import ReviewSerializer, ReviewCreateSerializer, CommentSerializer
+from adopt_review.models import Review, AdoptReviewComment
 from notice.paginations.Pagination import Pagination
 
 
@@ -34,3 +34,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+
+
+class CommentViewset(viewsets.ModelViewSet):
+    queryset = AdoptReviewComment.objects.all()
+    serializer_class = CommentSerializer
