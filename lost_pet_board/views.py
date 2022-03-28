@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 
 from lost_pet_board.models import LostPetBoard, LostPetBoardImage
 from lost_pet_board.serializers import LostPetBoardSerializer, LostPetBoardCreateSerializer
@@ -43,6 +44,26 @@ class LostPetViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+
+    def create(self, request, *args, **kwargs):
+
+        image_data = request.data["board_image"]
+
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            return Response(serializer.errors)
+
+        lost_board_no = serializer.data["lost_board_no"]
+
+        image_serializer = LostPetBoardImageSerializer(data={"image": image_data,
+                                                               "lost_board_no": lost_board_no})
+
+        if image_serializer.is_valid():
+            image_serializer.save()
+
+        return Response(serializer.data)
 
 
 class LostPetBoardImageViewSet(viewsets.ModelViewSet):
