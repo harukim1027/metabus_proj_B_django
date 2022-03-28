@@ -75,6 +75,8 @@ class User(AbstractUser):
                                     ],
                                     help_text="입력 예) 042-1234-1234")
 
+
+
     email = models.EmailField(max_length=50, unique=True, null=False)
 
     region = models.CharField(
@@ -106,6 +108,12 @@ class User(AbstractUser):
     password_quiz_answer = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+    # 회원 가입 인증 시 계정 활성화 하기 위한 필드
+    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
