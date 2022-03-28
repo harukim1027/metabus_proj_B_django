@@ -26,3 +26,4 @@ class AnimalSerializer(serializers.ModelSerializer):
         fields = "__all__"
         depth = 1
 
+

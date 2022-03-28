@@ -41,7 +41,7 @@ class Review(TimestampedModel):
 # 입양 다이어리 후기 사진
 class AdoptReviewImage(models.Model):
     review_image_no = models.AutoField(primary_key=True)
-    image = models.ImageField(blank=False, null=False, validators=[validate_image])
+    image = models.ImageField(null=False, validators=[validate_image])
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_image")
 
     class Meta:
@@ -51,10 +51,8 @@ class AdoptReviewImage(models.Model):
 # 입양 다이어리 게시판 댓글
 class AdoptReviewComment(TimestampedModel):
     review_comment_no = models.AutoField(primary_key=True)
-
     comment_content = models.TextField()
-
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comments")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
