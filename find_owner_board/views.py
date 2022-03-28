@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -63,8 +62,6 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
 
         if image_serializer.is_valid():
             image_serializer.save()
-        # else:
-        #     return Response(image_serializer.errors)
 
         return Response(serializer.data)
 
@@ -83,3 +80,4 @@ class FindOwnerBoardImageViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+
