@@ -146,4 +146,3 @@ class FindOwnerBoardImage(TimestampedModel):
 
     class Meta:
         ordering = ['-find_image_no']
-
