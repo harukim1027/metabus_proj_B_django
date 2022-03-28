@@ -63,8 +63,8 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
 
         if image_serializer.is_valid():
             image_serializer.save()
-        else:
-            return Response(image_serializer.errors)
+        # else:
+        #     return Response(image_serializer.errors)
 
         return Response(serializer.data)
 
