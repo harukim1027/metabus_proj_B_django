@@ -4,7 +4,7 @@ from streetanimal.models import Animal, AllSecurityCenter, AnimalImage
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
-    list_display = ["announce_no", "breed", "color", "sex", "age", "status"]
+    list_display = ["announce_no", "breed", "color", "sex"]
     list_display_links = ["announce_no"]
     search_fields = ["announce_no"]
 

@@ -1,1 +1,6 @@
 -r requirements/prod.txt
+
+bcrypt~=3.2.0
+six~=1.16.0
+requests~=2.26.0
+aescipher~=6.0.0
