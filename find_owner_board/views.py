@@ -80,3 +80,4 @@ class FindOwnerBoardImageViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+

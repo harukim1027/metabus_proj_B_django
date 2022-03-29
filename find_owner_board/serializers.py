@@ -33,10 +33,11 @@ class FindOwnerBoardCreateSerializer(serializers.ModelSerializer):
         fields = ["find_board_no", "title", "status", "content", "animal_type", "dog_breed", "cat_breed", "size", "sex",
                   "animal_tag", "find_location", "find_time", "board_image", "user", "created_at", "updated_at"]
 
-        def create(self, validated_data):
-            images = self.context['request'].FILES.getlist('board_image')
+    def create(self, validated_data):
+        images = self.context['request'].FILES.getlist('board_image')
 
-            instance = FindOwnerBoard.objects.create(**validated_data)
-            for image in images:
-                FindOwnerBoardImage.objects.create(find_board_no=instance, image=image)
-                return instance
+        instance = FindOwnerBoard.objects.create(**validated_data)
+        for image in images:
+            FindOwnerBoardImage.objects.create(find_board_no=instance, image=image)
+        return instance
+
