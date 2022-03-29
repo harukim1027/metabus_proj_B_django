@@ -19,10 +19,10 @@ class AllSecurityCenter(models.Model):
 
 
 class Animal(models.Model):
-    announce_no = models.CharField(primary_key=True, max_length=30)
+    announce_no = models.CharField(primary_key=True, max_length=60)
     kind_of_animal = models.CharField(max_length=18)
     breed = models.CharField(max_length=30)
-    color = models.CharField(max_length=20)
+    color = models.CharField(max_length=50)
 
     # choices 필드
     sex = models.CharField(max_length=30)
@@ -31,12 +31,12 @@ class Animal(models.Model):
     neutering = models.CharField(max_length=30)
 
     info = models.TextField()
-    date_time_of_receipt = models.DateTimeField()
+    date_time_of_receipt = models.TextField()
     reason_for_rescue = models.TextField()
-    place_of_discovery = models.CharField(max_length=50)
-    period_of_announcement = models.DateField()
-    shelter = models.CharField(max_length=30)
-    person_in_charge = models.CharField(max_length=18)
+    place_of_discovery = models.TextField()
+    period_of_announcement = models.TextField()
+    shelter = models.TextField()
+    person_in_charge = models.TextField()
     significant = models.TextField()
 
     center_name = models.ForeignKey(AllSecurityCenter, on_delete=models.CASCADE)

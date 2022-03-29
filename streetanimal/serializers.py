@@ -21,9 +21,6 @@ class CenterSerializer(serializers.ModelSerializer):
 
 
 class AnimalSerializer(serializers.ModelSerializer):
-    date_time_of_receipt = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    period_of_announcement = serializers.DateField(format="%Y-%m-%d")
-
     announce_image = AnimalImageSerializer(many=True, read_only=True)
 
     class Meta:
