@@ -20,9 +20,9 @@ class AllSecurityCenter(models.Model):
 
 class Animal(models.Model):
     announce_no = models.CharField(primary_key=True, max_length=60)
-    kind_of_animal = models.CharField(max_length=18)
-    breed = models.CharField(max_length=30)
-    color = models.CharField(max_length=50)
+    kind_of_animal = models.CharField(max_length=40)
+    breed = models.CharField(max_length=40)
+    color = models.CharField(max_length=40)
 
     # choices 필드
     sex = models.CharField(max_length=30)
