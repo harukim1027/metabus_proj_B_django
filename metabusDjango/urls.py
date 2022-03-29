@@ -16,6 +16,7 @@ urlpatterns = [
 
 
     path('lost_pet_board/', include("lost_pet_board.urls")),
+
 ]
 
 

@@ -62,3 +62,7 @@ class AnimalViewSet(viewsets.ModelViewSet):
             return [AllowAny()]
         return [IsAuthenticated()]
 
+
+class CentersViewSet(viewsets.ModelViewSet):
+    queryset = AllSecurityCenter.objects.all()
+    serializer_class = CenterSerializer
