@@ -9,14 +9,6 @@ def validate_image(image):
         raise ValidationError("이미지의 최대 크기는 %s MB 입니다." % limit_mb)
 
 
-class TimestampedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
 class AllSecurityCenter(models.Model):
     center_name = models.CharField(max_length=30, unique=True, primary_key=True)
     center_call = models.CharField(max_length=14)
@@ -26,7 +18,7 @@ class AllSecurityCenter(models.Model):
         return self.center_name
 
 
-class Animal(TimestampedModel):
+class Animal(models.Model):
     announce_no = models.CharField(primary_key=True, max_length=30)
     kind_of_animal = models.CharField(max_length=18)
     breed = models.CharField(max_length=30)

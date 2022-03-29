@@ -66,3 +66,4 @@ class AnimalViewSet(viewsets.ModelViewSet):
 class CentersViewSet(viewsets.ModelViewSet):
     queryset = AllSecurityCenter.objects.all()
     serializer_class = CenterSerializer
+
