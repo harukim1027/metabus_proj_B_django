@@ -2,14 +2,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.db.models import Q
 
-from notice.paginations.Pagination import Pagination
+from streetanimal.paginations.Pagination import AnimalPagination
 from streetanimal.models import Animal, AllSecurityCenter
 from streetanimal.serializers import AnimalSerializer, AnimalCreateSerializer, CenterSerializer
 
 
 class AnimalPageViewSet(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
-    pagination_class = Pagination
+    pagination_class = AnimalPagination
 
     def get_serializer_class(self):
         method = self.request.method
@@ -61,9 +61,3 @@ class AnimalViewSet(viewsets.ModelViewSet):
         if method == "GET" or method == "PATCH":
             return [AllowAny()]
         return [IsAuthenticated()]
-
-
-class CentersViewSet(viewsets.ModelViewSet):
-    queryset = AllSecurityCenter.objects.all()
-    serializer_class = CenterSerializer
-
