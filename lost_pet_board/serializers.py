@@ -2,12 +2,6 @@ from rest_framework import serializers
 from lost_pet_board.models import LostPetBoard, LostPetBoardImage
 
 
-class LostPetBoardCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LostPetBoard
-        fields = "__all__"
-
-
 class LostPetBoardImageCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = LostPetBoardImage
@@ -21,9 +15,14 @@ class LostPetBoardImageSerializer(serializers.ModelSerializer):
 
 
 class LostPetBoardSerializer(serializers.ModelSerializer):
-    # lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    # created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    # updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    board_image = LostPetBoardImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = LostPetBoard
+        fields = "__all__"
+
+
+class LostPetBoardCreateSerializer(serializers.ModelSerializer):
     board_image = LostPetBoardImageSerializer(many=True, read_only=True)
 
     class Meta:
@@ -36,6 +35,6 @@ class LostPetBoardSerializer(serializers.ModelSerializer):
 
         instance = LostPetBoard.objects.create(**validated_data)
         for image in images:
-            LostPetBoardImage.objects.create(find_board_no=instance, image=image)
+            LostPetBoardImage.objects.create(lost_board_no=instance, image=image)
         return instance
 

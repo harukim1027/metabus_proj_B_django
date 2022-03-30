@@ -23,8 +23,6 @@ class FindOwnerBoardSerializer(serializers.ModelSerializer):
 
 
 class FindOwnerBoardCreateSerializer(serializers.ModelSerializer):
-    # created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    # updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     board_image = FindOwnerBoardImageSerializer(many=True, read_only=True)
     # 기본적으로 중첩된 Serializer 에서는 쓰기(Create), 갱신(Update)를 지원해주지 않음. 그래서 read_only=True 옵션을 넣음
 
