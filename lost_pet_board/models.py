@@ -31,9 +31,9 @@ class LostPetBoard(TimestampedModel):
     content = models.TextField()
     pet_name = models.CharField(max_length=20)
     animal_type = models.CharField(max_length=10, choices=(
-        ("강아지", "강아지"),
+        ("개", "개"),
         ("고양이", "고양이"),
-    ), default="강아지")
+    ), default="개")
 
     dog_breed = models.CharField(max_length=30, choices=(
         ("전체", "전체"),
