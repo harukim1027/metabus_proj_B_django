@@ -32,9 +32,9 @@ class FindOwnerBoard(TimestampedModel):
     ), default="찾는중", db_index=True)
     content = models.TextField()
     animal_type = models.CharField(max_length=10, choices=(
-        ("강아지", "강아지"),
+        ("개", "개"),
         ("고양이", "고양이"),
-    ), default="강아지")
+    ), default="개")
 
     dog_breed = models.CharField(max_length=30, choices=(
         ("전체", "전체"),
