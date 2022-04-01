@@ -22,7 +22,7 @@ class AnimalPageViewSet(viewsets.ModelViewSet):
 
         query = self.request.query_params.get("query", "")
         if query:
-            qs = qs.filter(announce_no__icontains=query) or qs.filter(kind_of_animal__icontains=query)
+            qs = qs.filter(announce_no__icontains=query) or qs.filter(kind_of_animal__icontains=query) or qs.filter(sex__icontains=query)
 
         return qs
 
