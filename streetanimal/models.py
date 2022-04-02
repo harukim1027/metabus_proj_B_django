@@ -27,18 +27,20 @@ class Animal(models.Model):
     # choices 필드
     sex = models.CharField(max_length=30)
 
-    # choices 필드
+    age = models.CharField(max_length=40)
+    weight = models.CharField(max_length=30)
+
+    place_of_discovery = models.TextField()
+
+    date_time_of_receipt = models.TextField()
+
     neutering = models.CharField(max_length=30)
 
     info = models.TextField()
-    date_time_of_receipt = models.TextField()
-    reason_for_rescue = models.TextField()
-    place_of_discovery = models.TextField()
-    period_of_announcement = models.TextField()
-    shelter = models.TextField()
-    person_in_charge = models.TextField()
-    significant = models.TextField()
+    competent_organization = models.TextField()
+    protect_status = models.CharField(max_length=18)
 
+    image_url = models.TextField()
     center_name = models.ForeignKey(AllSecurityCenter, on_delete=models.CASCADE)
 
     def __str__(self):

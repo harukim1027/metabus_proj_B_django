@@ -237,9 +237,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SEVER_EMAIL = get_secret("SERVER_EMAIL")
 
-EMAIL_BACKEND = get_secret("EMAIL_BACKEND"
-
-                           )
+EMAIL_BACKEND = get_secret("EMAIL_BACKEND")
 
 # # reset link가 https가 아니라 http로 갈 때]
 # SECURE_SSL_REDIRECT = True
@@ -250,5 +248,3 @@ REGISTRATION_OPEN = True # 기본값
 
 
 
-
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
