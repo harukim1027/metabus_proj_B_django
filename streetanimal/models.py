@@ -40,7 +40,10 @@ class Animal(models.Model):
     competent_organization = models.TextField()
     protect_status = models.CharField(max_length=18)
 
-    image_url = models.TextField()
+    image_url1 = models.TextField()
+    image_url2 = models.TextField(null=True)
+    image_url3 = models.TextField(null=True)
+
     center_name = models.ForeignKey(AllSecurityCenter, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -50,13 +53,3 @@ class Animal(models.Model):
         ordering = ['-announce_no']
 
 
-# 유기동물 이미지
-class AnimalImage(models.Model):
-    animal_image_no = models.AutoField(primary_key=True)
-
-    image = models.ImageField(blank=False, validators=[validate_image])
-
-    announce_no = models.ForeignKey(Animal, on_delete=models.CASCADE, related_name="announce_image")
-
-    class Meta:
-        ordering = ['-animal_image_no']

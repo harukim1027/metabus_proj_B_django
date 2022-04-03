@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from streetanimal.models import Animal, AnimalImage, AllSecurityCenter
+from streetanimal.models import Animal, AllSecurityCenter
 
 
 class AnimalCreateSerializer(serializers.ModelSerializer):
@@ -7,11 +7,6 @@ class AnimalCreateSerializer(serializers.ModelSerializer):
         model = Animal
         fields = "__all__"
 
-
-class AnimalImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnimalImage
-        fields = "__all__"
 
 
 class CenterSerializer(serializers.ModelSerializer):
@@ -22,7 +17,6 @@ class CenterSerializer(serializers.ModelSerializer):
 
 # 데이트 타임 필드 삭제
 class AnimalSerializer(serializers.ModelSerializer):
-    announce_image = AnimalImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Animal
