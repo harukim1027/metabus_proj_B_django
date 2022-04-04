@@ -20,6 +20,7 @@ class FindOwnerBoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = FindOwnerBoard
         fields = "__all__"
+        depth = 1
 
 
 class FindOwnerBoardCreateSerializer(serializers.ModelSerializer):
