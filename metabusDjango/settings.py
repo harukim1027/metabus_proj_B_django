@@ -48,10 +48,6 @@ INSTALLED_APPS = [
     'notice',  # 공지사항
     'find_owner_board',  # 주인찾습니다 게시판
     'lost_pet_board', # 잃어버렸어요 게시판
-
-    'around_infra', #주변 인프라
-
-
 ]
 
 if DEBUG:
@@ -237,9 +233,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SEVER_EMAIL = get_secret("SERVER_EMAIL")
 
-EMAIL_BACKEND = get_secret("EMAIL_BACKEND"
-
-                           )
+EMAIL_BACKEND = get_secret("EMAIL_BACKEND")
 
 # # reset link가 https가 아니라 http로 갈 때]
 # SECURE_SSL_REDIRECT = True
@@ -250,5 +244,3 @@ REGISTRATION_OPEN = True # 기본값
 
 
 
-
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']

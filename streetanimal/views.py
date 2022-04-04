@@ -21,8 +21,20 @@ class AnimalPageViewSet(viewsets.ModelViewSet):
         qs = super().get_queryset()
 
         query = self.request.query_params.get("query", "")
+        kind = self.request.query_params.get("kind", "")
+        sex = self.request.query_params.get("sex", "")
+        breed = self.request.query_params.get("breed", "")
+        place_of_discovery = self.request.query_params.get("place_of_discovery", "")
+        centerid = self.request.query_params.get("centerid", "")
+
         if query:
-            qs = qs.filter(animal_no__icontains=query) or qs.filter(animal_reg_num__icontains=query)
+            qs = qs.filter(announce_no__icontains=query)
+
+        if kind:
+            qs = qs.filter(kind_of_animal__exact=kind, sex__exact=sex, breed__exact=breed, place_of_discovery__icontains=place_of_discovery)
+
+        if centerid:
+            qs = qs.filter(center_name__center_name__exact=centerid)
 
         return qs
 
@@ -51,8 +63,20 @@ class AnimalViewSet(viewsets.ModelViewSet):
         qs = super().get_queryset()
 
         query = self.request.query_params.get("query", "")
+        kind = self.request.query_params.get("kind", "")
+        sex = self.request.query_params.get("sex", "")
+        breed = self.request.query_params.get("breed", "")
+        place_of_discovery = self.request.query_params.get("place_of_discovery", "")
+        center_name = self.request.query_params.get("center_name", "")
+
         if query:
-            qs = qs.filter(animal_reg_num__icontains=query)
+            qs = qs.filter(announce_no__icontains=query)
+
+        if kind:
+            qs = qs.filter(kind_of_animal__exact=kind, sex__exact=sex, breed__exact=breed, place_of_discovery__icontains=place_of_discovery)
+
+        if center_name:
+            qs = qs.filter(center_name__exact=center_name)
 
         return qs
 

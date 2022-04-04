@@ -27,17 +27,22 @@ class Animal(models.Model):
     # choices 필드
     sex = models.CharField(max_length=30)
 
-    # choices 필드
+    age = models.CharField(max_length=40)
+    weight = models.CharField(max_length=30)
+
+    place_of_discovery = models.TextField()
+
+    date_time_of_receipt = models.TextField()
+
     neutering = models.CharField(max_length=30)
 
     info = models.TextField()
-    date_time_of_receipt = models.TextField()
-    reason_for_rescue = models.TextField()
-    place_of_discovery = models.TextField()
-    period_of_announcement = models.TextField()
-    shelter = models.TextField()
-    person_in_charge = models.TextField()
-    significant = models.TextField()
+    competent_organization = models.TextField()
+    protect_status = models.CharField(max_length=18)
+
+    image_url1 = models.TextField()
+    image_url2 = models.TextField(null=True)
+    image_url3 = models.TextField(null=True)
 
     center_name = models.ForeignKey(AllSecurityCenter, on_delete=models.CASCADE)
 
@@ -48,13 +53,3 @@ class Animal(models.Model):
         ordering = ['-announce_no']
 
 
-# 유기동물 이미지
-class AnimalImage(models.Model):
-    animal_image_no = models.AutoField(primary_key=True)
-
-    image = models.ImageField(blank=False, validators=[validate_image])
-
-    announce_no = models.ForeignKey(Animal, on_delete=models.CASCADE, related_name="announce_image")
-
-    class Meta:
-        ordering = ['-animal_image_no']

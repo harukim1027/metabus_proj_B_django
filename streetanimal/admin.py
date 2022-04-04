@@ -1,6 +1,5 @@
 from django.contrib import admin
-from streetanimal.models import Animal, AllSecurityCenter, AnimalImage
-
+from streetanimal.models import Animal, AllSecurityCenter
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
@@ -15,8 +14,4 @@ class CenterAdmin(admin.ModelAdmin):
     list_display_links = ["center_name"]
     search_fields = ["center_name"]
 
-
-@admin.register(AnimalImage)
-class AnimalImageAdmin(admin.ModelAdmin):
-    pass
 

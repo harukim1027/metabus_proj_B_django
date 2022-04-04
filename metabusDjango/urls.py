@@ -13,8 +13,6 @@ urlpatterns = [
     path('notice/', include("notice.urls")),
     path('streetanimal/', include("streetanimal.urls")),
     path('find_owner_board/', include("find_owner_board.urls")),
-
-
     path('lost_pet_board/', include("lost_pet_board.urls")),
 
 ]
