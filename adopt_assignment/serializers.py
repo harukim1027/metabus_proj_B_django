@@ -8,12 +8,6 @@ class AssignmentCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class AssignmentImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AdoptAssignmentHomeImage
-        fields = "__all__"
-
-
 class AssignmentSerializer(serializers.ModelSerializer):
     created_at = serializers.DateField(format="%Y-%m-%d")
     updated_at = serializers.DateField(format="%Y-%m-%d")

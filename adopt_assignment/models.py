@@ -32,6 +32,9 @@ class AdoptAssignment(TimestampedModel):
         ("원룸", "원룸"),
         ("오피스텔", "오피스텔"),
     ], default="아파트")
+    picture_of_residence1 = models.ImageField(null=False, validators=[validate_image])
+    picture_of_residence2 = models.ImageField(null=False, validators=[validate_image])
+    picture_of_residence3 = models.ImageField(null=False, validators=[validate_image])
     have_pet_or_not = models.BooleanField()
     date_to_meet = models.DateField()
     status = models.CharField(max_length=30, choices=(
@@ -47,14 +50,4 @@ class AdoptAssignment(TimestampedModel):
 
     class Meta:
         ordering = ['-assignment_no']
-
-
-# 입양 신청 거주지 사진
-class AdoptAssignmentHomeImage(models.Model):
-    home_image_no = models.AutoField(primary_key=True)
-    image = models.ImageField(validators=[validate_image])
-    assignment_no = models.ForeignKey(AdoptAssignment, on_delete=models.CASCADE, related_name="home_image")
-
-    class Meta:
-        ordering = ['-home_image_no']
 
