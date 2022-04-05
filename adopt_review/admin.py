@@ -17,7 +17,7 @@ class AdoptReviewCommentAdmin(admin.ModelAdmin):
 
 @admin.register(AdoptReviewImage)
 class AdoptReviewImageAdmin(admin.ModelAdmin):
-    list_display = ["review_image_no", "image", "review"]
+    list_display = ["review_image_no", "image", "review_no"]
     list_display_links = ["image"]
     search_fields = ["image", "review"]
 

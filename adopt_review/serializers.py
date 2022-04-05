@@ -2,9 +2,9 @@ from rest_framework import serializers
 from adopt_review.models import Review, AdoptReviewImage, AdoptReviewComment
 
 
-class ReviewCreateSerializer(serializers.ModelSerializer):
+class ReviewImageCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Review
+        model = AdoptReviewImage
         fields = "__all__"
 
 
@@ -31,4 +31,20 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = ["review_no", "title", "content", "user", "adoptassignment", "created_at",
                   "updated_at", "review_image", "comments"]
         depth = 2
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    review_image = ReviewImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Review
+        fields = "__all__"
+
+    def create(self, validated_data):
+        images = self.context['request'].FILES.getlist('review_image')
+
+        instance = Review.objects.create(**validated_data)
+        for image in images:
+            AdoptReviewImage.objects.create(review_no=instance, image=image)
+        return instance
 
