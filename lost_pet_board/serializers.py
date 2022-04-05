@@ -20,6 +20,7 @@ class LostPetBoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = LostPetBoard
         fields = "__all__"
+        depth = 1
 
 
 class LostPetBoardCreateSerializer(serializers.ModelSerializer):
