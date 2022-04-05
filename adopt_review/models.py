@@ -42,7 +42,7 @@ class Review(TimestampedModel):
 class AdoptReviewImage(models.Model):
     review_image_no = models.AutoField(primary_key=True)
     image = models.ImageField(null=False, validators=[validate_image])
-    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_image")
+    review_no = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_image")
 
     class Meta:
         ordering = ['-review_image_no']
