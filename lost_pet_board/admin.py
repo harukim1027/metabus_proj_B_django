@@ -6,7 +6,7 @@ from lost_pet_board.models import LostPetBoard, LostPetBoardComment, LostPetBoar
 class LostPetBoardAdmin(admin.ModelAdmin):
     list_display = ["lost_board_no", "user", "title"]
     list_display_links = ["title"]
-    search_fields = ["pet_name", 'breed', 'size', "title"]
+    search_fields = ["pet_name", 'breed', "title"]
 
 
 @admin.register(LostPetBoardComment)
