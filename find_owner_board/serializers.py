@@ -29,7 +29,7 @@ class FindOwnerBoardCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FindOwnerBoard
-        fields = ["find_board_no", "title", "status", "content", "animal_type", "dog_breed", "cat_breed", "size", "sex",
+        fields = ["find_board_no", "title", "status", "content", "animal_type", "dog_breed", "cat_breed", "sex",
                   "animal_tag", "find_location", "find_time", "board_image", "user", "created_at", "updated_at"]
 
     def create(self, validated_data):

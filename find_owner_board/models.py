@@ -105,12 +105,6 @@ class FindOwnerBoard(TimestampedModel):
         ("한국 고양이", "한국 고양이"),
     ), default="전체")
 
-    size = models.CharField(max_length=10, choices=(
-        ("소형", "소형"),
-        ("중형", "중형"),
-        ("대형", "대형"),
-    ), default="소형")
-
     sex = models.CharField(max_length=10, choices=(
         ("미상", "미상"),
         ("암컷", "암컷"),
