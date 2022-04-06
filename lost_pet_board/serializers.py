@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from lost_pet_board.models import LostPetBoard, LostPetBoardImage
+from lost_pet_board.models import LostPetBoard, LostPetBoardImage, LostPetBoardComment
 
 
 class LostPetBoardImageCreateSerializer(serializers.ModelSerializer):
@@ -11,6 +11,12 @@ class LostPetBoardImageCreateSerializer(serializers.ModelSerializer):
 class LostPetBoardImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = LostPetBoardImage
+        fields = "__all__"
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LostPetBoardComment
         fields = "__all__"
 
 

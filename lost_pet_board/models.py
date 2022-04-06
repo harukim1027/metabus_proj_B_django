@@ -133,10 +133,10 @@ class LostPetBoardComment(TimestampedModel):
     lost_comment_no = models.AutoField(primary_key=True)
     comment_content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    lost_board_no = models.ForeignKey(LostPetBoard, on_delete=models.CASCADE)
+    lost_board_no = models.ForeignKey(LostPetBoard, on_delete=models.CASCADE, related_name="comments")
 
     def __str__(self):
         return self.comment_content
 
     class Meta:
-        ordering = ['-lost_comment_no']
+        ordering = ['lost_comment_no']
