@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from lost_pet_board.models import LostPetBoard, LostPetBoardImage
+from lost_pet_board.models import LostPetBoard, LostPetBoardImage, LostPetBoardComment
 
 
 class LostPetBoardImageCreateSerializer(serializers.ModelSerializer):
@@ -14,8 +14,15 @@ class LostPetBoardImageSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LostPetBoardComment
+        fields = "__all__"
+
+
 class LostPetBoardSerializer(serializers.ModelSerializer):
     board_image = LostPetBoardImageSerializer(many=True, read_only=True)
+    lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = LostPetBoard
@@ -25,6 +32,7 @@ class LostPetBoardSerializer(serializers.ModelSerializer):
 
 class LostPetBoardCreateSerializer(serializers.ModelSerializer):
     board_image = LostPetBoardImageSerializer(many=True, read_only=True)
+    lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = LostPetBoard
