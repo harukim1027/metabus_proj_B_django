@@ -23,6 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class FindOwnerBoardSerializer(serializers.ModelSerializer):
     board_image = FindOwnerBoardImageSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+    find_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = FindOwnerBoard
@@ -32,6 +33,7 @@ class FindOwnerBoardSerializer(serializers.ModelSerializer):
 
 class FindOwnerBoardCreateSerializer(serializers.ModelSerializer):
     board_image = FindOwnerBoardImageSerializer(many=True, read_only=True)
+    find_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     # 기본적으로 중첩된 Serializer 에서는 쓰기(Create), 갱신(Update)를 지원해주지 않음. 그래서 read_only=True 옵션을 넣음
 
     class Meta:
