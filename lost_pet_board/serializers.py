@@ -22,6 +22,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class LostPetBoardSerializer(serializers.ModelSerializer):
     board_image = LostPetBoardImageSerializer(many=True, read_only=True)
+    lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = LostPetBoard
@@ -31,6 +32,7 @@ class LostPetBoardSerializer(serializers.ModelSerializer):
 
 class LostPetBoardCreateSerializer(serializers.ModelSerializer):
     board_image = LostPetBoardImageSerializer(many=True, read_only=True)
+    lost_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = LostPetBoard
