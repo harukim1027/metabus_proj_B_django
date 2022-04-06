@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from lost_pet_board.models import LostPetBoard, LostPetBoardImage
-from lost_pet_board.serializers import LostPetBoardSerializer, LostPetBoardCreateSerializer
+from lost_pet_board.models import LostPetBoard, LostPetBoardImage, LostPetBoardComment
+from lost_pet_board.serializers import LostPetBoardSerializer, LostPetBoardCreateSerializer, CommentSerializer
 from lost_pet_board.serializers import LostPetBoardImageSerializer, LostPetBoardImageCreateSerializer
 from notice.paginations.Pagination import Pagination
 
@@ -84,3 +84,8 @@ class LostPetBoardImageViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = LostPetBoardComment.objects.all()
+    serializer_class = CommentSerializer
