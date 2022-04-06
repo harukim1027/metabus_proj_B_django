@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from find_owner_board.models import FindOwnerBoard, FindOwnerBoardImage
+from find_owner_board.models import FindOwnerBoard, FindOwnerBoardImage, FindOwnerBoardComment
 
 
 class FindOwnerBoardImageCreateSerializer(serializers.ModelSerializer):
@@ -14,8 +14,15 @@ class FindOwnerBoardImageSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FindOwnerBoardComment
+        fields = "__all__"
+
+
 class FindOwnerBoardSerializer(serializers.ModelSerializer):
     board_image = FindOwnerBoardImageSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = FindOwnerBoard

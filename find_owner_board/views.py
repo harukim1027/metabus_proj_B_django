@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from find_owner_board.models import FindOwnerBoard, FindOwnerBoardImage
-from find_owner_board.serializers import FindOwnerBoardSerializer, FindOwnerBoardCreateSerializer
+from find_owner_board.models import FindOwnerBoard, FindOwnerBoardImage, FindOwnerBoardComment
+from find_owner_board.serializers import FindOwnerBoardSerializer, FindOwnerBoardCreateSerializer, CommentSerializer
 from find_owner_board.serializers import FindOwnerBoardImageSerializer, FindOwnerBoardImageCreateSerializer
 from notice.paginations.Pagination import Pagination
 
@@ -80,3 +80,9 @@ class FindOwnerBoardImageViewSet(viewsets.ModelViewSet):
         if method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = FindOwnerBoardComment.objects.all()
+    serializer_class = CommentSerializer
+

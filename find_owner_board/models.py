@@ -135,7 +135,7 @@ class FindOwnerBoardComment(TimestampedModel):
     find_comment_no = models.AutoField(primary_key=True)
     comment_content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    find_board_no = models.ForeignKey(FindOwnerBoard, on_delete=models.CASCADE)
+    find_board_no = models.ForeignKey(FindOwnerBoard, on_delete=models.CASCADE, related_name="comments")
 
     def __str__(self):
         return self.comment_content
