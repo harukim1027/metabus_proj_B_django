@@ -59,4 +59,4 @@ class AdoptReviewComment(TimestampedModel):
         return self.comment_content
 
     class Meta:
-        ordering = ['-review_comment_no']
+        ordering = ['review_comment_no']
