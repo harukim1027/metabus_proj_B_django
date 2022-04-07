@@ -25,11 +25,7 @@ class TimestampedModel(models.Model):
 # 입양 다이어리
 class Review(TimestampedModel):
     review_no = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=50, db_index=True,
-                             validators=[
-                                 MinLengthValidator(3),
-                                 RegexValidator(r"[ㄱ-힣]", message="한글을 입력해주세요."),
-                             ])
+    title = models.CharField(max_length=50, db_index=True)
     content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     adoptassignment = models.ForeignKey(AdoptAssignment, on_delete=models.CASCADE)
