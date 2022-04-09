@@ -44,7 +44,7 @@ class NoticeCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notice
-        fields = "__all__"
+        fields = ["notice_no", "title", "content", "user", "notice_image", "notice_file", "created_at", "updated_at"]
 
     def create(self, validated_data):
         images = self.context['request'].FILES.getlist('notice_image')
@@ -53,9 +53,7 @@ class NoticeCreateSerializer(serializers.ModelSerializer):
         instance = Notice.objects.create(**validated_data)
         for image in images:
             NoticeImage.objects.create(notice_no=instance, image=image)
-        # return instance
-        #
-        # instance = Notice.objects.create(**validated_data)
+
         for file in files:
-            NoticeFile.objects.create(notice_no=instance, file=file)
+            NoticeFile.objects.create(notice_no=instance, file=file, filename=file.name)
         return instance

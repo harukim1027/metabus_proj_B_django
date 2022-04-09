@@ -37,14 +37,6 @@ class NoticeViewSet(viewsets.ModelViewSet):
         image_data = request.data.get("notice_image", None)
         file_data = request.data.get("notice_file", None)
 
-        # if image_data:
-        #     for image in image_data:
-        #         pass
-        #
-        # if file_data:
-        #     for file in file_data:
-        #         pass
-
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
