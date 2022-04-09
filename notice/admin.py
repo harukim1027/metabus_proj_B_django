@@ -10,7 +10,6 @@ class NoticeAdmin(admin.ModelAdmin):
     search_fields = ["title"]
 
 
-
 @admin.register(NoticeFile)
 class NoticeFileAdmin(admin.ModelAdmin):
     list_display = ["notice_file_no", "file"]
