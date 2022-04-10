@@ -50,6 +50,6 @@ class Animal(models.Model):
         return self.announce_no
 
     class Meta:
-        ordering = ['-announce_no']
+        ordering = ['date_time_of_receipt']
 
 
