@@ -1,4 +1,5 @@
 import os
+from uuid import uuid4
 
 from django.conf import settings
 from django.db import models
@@ -49,7 +50,8 @@ class NoticeImage(models.Model):
 class NoticeFile(models.Model):
     notice_file_no = models.AutoField(primary_key=True)
 
-    file = models.FileField(blank=True, validators=[validate_image])
+    file = models.FileField(blank=True)
+    filename = models.CharField(max_length=100)
 
     notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE, related_name="notice_file")
 
