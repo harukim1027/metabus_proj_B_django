@@ -22,7 +22,7 @@ class AssignmentViewSet(viewsets.ModelViewSet):
         author = self.request.query_params.get("author", "")
 
         if query:
-            qs = qs.filter(assignment_no__icontains=query) or qs.filter(adopter_name__icontains=query) or qs.filter(animal__announce_no__icontains=query) or qs.filter(user__nickname__icontains=query) or qs.filter(user__userID__icontains=query)
+            qs = qs.filter(assignment_no__icontains=query) or qs.filter(adopter_name__icontains=query) or qs.filter(animal__announce_no__icontains=query) or qs.filter(user__nickname__icontains=query)
 
         if author:
             qs = qs.filter(user__userID__exact=author)
@@ -51,8 +51,13 @@ class AssignmentPagingViewSet(viewsets.ModelViewSet):
         qs = super().get_queryset()
 
         query = self.request.query_params.get("query", "")
+        author = self.request.query_params.get("author", "")
+
         if query:
-            qs = qs.filter(assignment_no__icontains=query) or qs.filter(adopter_name__icontains=query) or qs.filter(animal__animal_reg_num__icontains=query) or qs.filter(user__nickname__icontains=query) or qs.filter(user__userID__icontains=query)
+            qs = qs.filter(assignment_no__icontains=query) or qs.filter(adopter_name__icontains=query) or qs.filter(animal__announce_no__icontains=query) or qs.filter(user__nickname__icontains=query)
+
+        if author:
+            qs = qs.filter(user__userID__exact=author)
 
         return qs
 

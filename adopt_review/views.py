@@ -74,7 +74,7 @@ class ReviewAllViewSet(viewsets.ModelViewSet):
 
         query = self.request.query_params.get("query", "")
         if query:
-            qs = qs.filter(animal_reg_num__icontains=query)
+            qs = qs.filter(announce_no__icontains=query)
 
         return qs
 
