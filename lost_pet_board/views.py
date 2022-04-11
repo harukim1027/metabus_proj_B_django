@@ -89,3 +89,4 @@ class LostPetBoardImageViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = LostPetBoardComment.objects.all()
     serializer_class = CommentSerializer
+    pagination_class = Pagination

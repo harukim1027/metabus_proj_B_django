@@ -85,4 +85,4 @@ class FindOwnerBoardImageViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = FindOwnerBoardComment.objects.all()
     serializer_class = CommentSerializer
-
+    pagination_class = Pagination

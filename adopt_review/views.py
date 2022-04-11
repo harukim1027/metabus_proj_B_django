@@ -57,6 +57,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = AdoptReviewComment.objects.all()
     serializer_class = CommentSerializer
+    pagination_class = Pagination
 
 
 class ReviewAllViewSet(viewsets.ModelViewSet):
