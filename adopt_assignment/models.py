@@ -4,6 +4,7 @@ from django.db import models
 from accounts.models import User
 from streetanimal.models import Animal
 from django.core.exceptions import ValidationError
+from datetime import date
 
 
 def validate_image(image):
@@ -51,3 +52,8 @@ class AdoptAssignment(TimestampedModel):
     class Meta:
         ordering = ['-assignment_no']
 
+    def save(self, *args, **kwargs):
+        if self.date_to_meet < date.today():
+            raise ValidationError("지난 날짜는 예약할 수 없습니다.")
+
+        super(AdoptAssignment, self).save(*args, **kwargs)
