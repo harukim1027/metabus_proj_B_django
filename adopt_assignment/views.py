@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from adopt_assignment.models import AdoptAssignment
-from adopt_assignment.serializers import AssignmentSerializer, AssignmentCreateSerializer
+from adopt_assignment.serializers import AssignmentSerializer, AssignmentCreateSerializer, AssignmentStatusSerializer
 from notice.paginations.Pagination import Pagination
 
 
@@ -13,6 +13,8 @@ class AssignmentViewSet(viewsets.ModelViewSet):
         method = self.request.method
         if method == "GET":
             return AssignmentSerializer
+        elif method == "PATCH":
+            return AssignmentStatusSerializer
         return AssignmentCreateSerializer
 
     def get_queryset(self):
