@@ -52,8 +52,12 @@ class AdoptAssignment(TimestampedModel):
     class Meta:
         ordering = ['-assignment_no']
 
-    def save(self, *args, **kwargs):
-        if self.date_to_meet < date.today():
-            raise ValidationError("지난 날짜는 예약할 수 없습니다.")
+    def save(self, request,  *args, **kwargs):
+        method = request.method
+        if method == "POST":
+            if self.date_to_meet < date.today():
+                raise ValidationError("지난 날짜는 예약할 수 없습니다.")
+        elif method == "PATCH":
+            pass
 
         super(AdoptAssignment, self).save(*args, **kwargs)

@@ -1,6 +1,8 @@
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.db.models import Q
+from rest_framework.response import Response
 
 from streetanimal.paginations.Pagination import AnimalPagination
 from streetanimal.models import Animal, AllSecurityCenter
@@ -84,3 +86,13 @@ class AnimalViewSet(viewsets.ModelViewSet):
         if method == "GET" or method == "PATCH":
             return [AllowAny()]
         return [IsAuthenticated()]
+
+
+@api_view()
+def stat(request):
+    return Response({
+        "count": Animal.objects.filter(protect_status='보호중').count(),
+        "process": Animal.objects.filter(protect_status='입양 매칭 중').count(),
+        "complite": Animal.objects.filter(protect_status='입양 완료!').count(),
+    })
+
