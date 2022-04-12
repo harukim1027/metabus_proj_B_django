@@ -127,7 +127,7 @@ class FindOwnerBoardImage(TimestampedModel):
     find_board_no = models.ForeignKey(FindOwnerBoard, on_delete=models.CASCADE, related_name="board_image")
 
     class Meta:
-        ordering = ['-find_image_no']
+        ordering = ['find_image_no']
 
 
 # 주인찾습니다 게시판 댓글

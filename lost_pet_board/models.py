@@ -125,7 +125,7 @@ class LostPetBoardImage(models.Model):
     lost_board_no = models.ForeignKey(LostPetBoard, on_delete=models.CASCADE, related_name="board_image")
 
     class Meta:
-        ordering = ['-lost_image_no']
+        ordering = ['lost_image_no']
 
 
 # 잃어버렸어요 게시판 댓글

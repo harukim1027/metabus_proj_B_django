@@ -41,7 +41,7 @@ class AdoptReviewImage(models.Model):
     review_no = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_image")
 
     class Meta:
-        ordering = ['-review_image_no']
+        ordering = ['review_image_no']
 
 
 # 입양 다이어리 게시판 댓글

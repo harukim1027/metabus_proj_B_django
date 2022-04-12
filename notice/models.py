@@ -43,7 +43,7 @@ class NoticeImage(models.Model):
     notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE, related_name="notice_image")
 
     class Meta:
-        ordering = ['-notice_image_no']
+        ordering = ['notice_image_no']
 
 
 # 공지사항 첨부파일
@@ -56,7 +56,7 @@ class NoticeFile(models.Model):
     notice_no = models.ForeignKey(Notice, on_delete=models.CASCADE, related_name="notice_file")
 
     class Meta:
-        ordering = ['-notice_file_no']
+        ordering = ['notice_file_no']
 
     def get_file_name1(self):
         return os.path.basename(self.file.name)
