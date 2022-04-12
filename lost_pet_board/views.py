@@ -41,6 +41,11 @@ class LostPetViewSet(viewsets.ModelViewSet):
         if sex:
             qs = qs.filter(sex__icontains=sex)
 
+        query = self.request.query_params.get("query", "")
+
+        if query:
+            qs = qs.filter(user__exact=query)
+
         return qs
 
     def get_permissions(self):
@@ -90,3 +95,11 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = LostPetBoardComment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = Pagination
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.query_params.get("query", "")
+
+        if query:
+            qs = qs.filter(user__exact=query)
+        return qs

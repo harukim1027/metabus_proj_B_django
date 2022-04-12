@@ -37,6 +37,11 @@ class FindOwnerBoardViewSet(viewsets.ModelViewSet):
         if author:
             qs = qs.filter(user__userID__icontains=author)
 
+        query = self.request.query_params.get("query", "")
+
+        if query:
+            qs = qs.filter(user__exact=query)
+
         return qs
 
     def get_permissions(self):
@@ -86,3 +91,11 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = FindOwnerBoardComment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = Pagination
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.query_params.get("query", "")
+
+        if query:
+            qs = qs.filter(user__exact=query)
+        return qs

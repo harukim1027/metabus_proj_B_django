@@ -23,7 +23,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
         query = self.request.query_params.get("query", "")
         if query:
-            qs = qs.filter(title__icontains=query) or qs.filter(review_no__icontains=query) or qs.filter(user__userID__icontains=query)
+            qs = qs.filter(title__icontains=query) or qs.filter(review_no__icontains=query) or qs.filter(user__userID__icontains=query) or qs.filter(user__exact=query)
 
         return qs
 
@@ -58,6 +58,14 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = AdoptReviewComment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = Pagination
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.query_params.get("query", "")
+
+        if query:
+            qs = qs.filter(user__exact=query)
+        return qs
 
 
 class ReviewAllViewSet(viewsets.ModelViewSet):
