@@ -18,6 +18,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = FindOwnerBoardComment
         fields = "__all__"
+        depth = 1
 
 
 class FindOwnerBoardSerializer(serializers.ModelSerializer):
