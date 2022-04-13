@@ -3,7 +3,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from lost_pet_board.models import LostPetBoard, LostPetBoardImage, LostPetBoardComment
-from lost_pet_board.serializers import LostPetBoardSerializer, LostPetBoardCreateSerializer, CommentSerializer
+from lost_pet_board.serializers import LostPetBoardSerializer, LostPetBoardCreateSerializer, CommentSerializer, \
+    CommentCreateSerializer
 from lost_pet_board.serializers import LostPetBoardImageSerializer, LostPetBoardImageCreateSerializer
 from notice.paginations.Pagination import Pagination
 
@@ -95,6 +96,12 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = LostPetBoardComment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = Pagination
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == "GET":
+            return CommentSerializer
+        return CommentCreateSerializer
 
     def get_queryset(self):
         qs = super().get_queryset()

@@ -139,4 +139,4 @@ class LostPetBoardComment(TimestampedModel):
         return self.comment_content
 
     class Meta:
-        ordering = ['-lost_comment_no']
+        ordering = ['lost_comment_no']

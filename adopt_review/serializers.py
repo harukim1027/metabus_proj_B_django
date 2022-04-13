@@ -21,6 +21,12 @@ class CommentSerializer(serializers.ModelSerializer):
         depth = 1
 
 
+class CommentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdoptReviewComment
+        fields = "__all__"
+
+
 class ReviewSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")

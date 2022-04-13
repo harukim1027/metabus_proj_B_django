@@ -21,6 +21,12 @@ class CommentSerializer(serializers.ModelSerializer):
         depth = 1
 
 
+class CommentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FindOwnerBoardComment
+        fields = "__all__"
+
+
 class FindOwnerBoardSerializer(serializers.ModelSerializer):
     board_image = FindOwnerBoardImageSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)

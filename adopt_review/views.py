@@ -2,8 +2,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from adopt_review.serializers import ReviewSerializer, ReviewCreateSerializer, CommentSerializer, ReviewImageSerializer, \
-    ReviewImageCreateSerializer
+from adopt_review.serializers import ReviewSerializer, ReviewCreateSerializer, CommentSerializer, ReviewImageSerializer, ReviewImageCreateSerializer, CommentCreateSerializer
 from adopt_review.models import Review, AdoptReviewComment, AdoptReviewImage
 from notice.paginations.Pagination import Pagination
 
@@ -58,6 +57,12 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = AdoptReviewComment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = Pagination
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == "GET":
+            return CommentSerializer
+        return CommentCreateSerializer
 
     def get_queryset(self):
         qs = super().get_queryset()

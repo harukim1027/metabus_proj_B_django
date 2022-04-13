@@ -21,6 +21,12 @@ class CommentSerializer(serializers.ModelSerializer):
         depth = 1
 
 
+class CommentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LostPetBoardComment
+        fields = "__all__"
+
+
 class LostPetBoardSerializer(serializers.ModelSerializer):
     board_image = LostPetBoardImageSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)

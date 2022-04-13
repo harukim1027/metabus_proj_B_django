@@ -141,4 +141,4 @@ class FindOwnerBoardComment(TimestampedModel):
         return self.comment_content
 
     class Meta:
-        ordering = ['-find_comment_no']
+        ordering = ['find_comment_no']

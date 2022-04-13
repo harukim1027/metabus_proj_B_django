@@ -3,7 +3,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from find_owner_board.models import FindOwnerBoard, FindOwnerBoardImage, FindOwnerBoardComment
-from find_owner_board.serializers import FindOwnerBoardSerializer, FindOwnerBoardCreateSerializer, CommentSerializer
+from find_owner_board.serializers import FindOwnerBoardSerializer, FindOwnerBoardCreateSerializer, CommentSerializer, \
+    CommentCreateSerializer
 from find_owner_board.serializers import FindOwnerBoardImageSerializer, FindOwnerBoardImageCreateSerializer
 from notice.paginations.Pagination import Pagination
 
@@ -91,6 +92,13 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = FindOwnerBoardComment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = Pagination
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == "GET":
+            return CommentSerializer
+        return CommentCreateSerializer
+
 
     def get_queryset(self):
         qs = super().get_queryset()
