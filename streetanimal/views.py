@@ -93,6 +93,6 @@ def stat(request):
     return Response({
         "count": Animal.objects.filter(protect_status='보호중').count(),
         "process": Animal.objects.filter(protect_status='입양 매칭 중').count(),
-        "complite": Animal.objects.filter(protect_status='입양 완료!').count(),
+        "complite": Animal.objects.filter(protect_status='입양 완료').count(),
     })
 
